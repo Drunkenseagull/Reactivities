@@ -535,7 +535,6 @@
         "dependencies": {
           "Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.8",
-          "Microsoft.EntityFrameworkCore.Relational": "6.0.8",
           "Microsoft.EntityFrameworkCore.Sqlite": "6.0.8"
         },
         "compile": {
@@ -1217,8 +1216,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
-              "projectPath": "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj"
+            "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj"
             },
             "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Persistence\\Persistence.csproj": {
               "projectPath": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Persistence\\Persistence.csproj"

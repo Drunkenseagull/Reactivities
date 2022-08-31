@@ -26,8 +26,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
-                "projectPath": "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj"
+              "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj"
               },
               "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Persistence\\Persistence.csproj": {
                 "projectPath": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Persistence\\Persistence.csproj"
@@ -64,14 +64,14 @@
         }
       }
     },
-    "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
+    "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\jdude\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jdude\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -139,8 +139,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
-                "projectPath": "c:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj"
+              "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\jdude\\Desktop\\Programming\\Main Projects\\Reactivities\\Domain\\Domain.csproj"
               }
             }
           }
@@ -156,10 +156,6 @@
           "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[6.0.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Relational": {
               "target": "Package",
               "version": "[6.0.8, )"
             },
