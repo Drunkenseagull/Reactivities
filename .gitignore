@@ -457,3 +457,10 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 API/bin/Debug/net6.0/API.dll
 API/bin/Debug/net6.0/Application.dll
+/API/reactivities.db
+/API/reactivities.db-shm
+/API/reactivities.db-wal
+/API/reactivities.db
+/API/reactivities.db
+/API/reactivities.db-shm
+/API/reactivities.db-wal
