@@ -1,16 +1,12 @@
 import { ChangeEvent, useState } from 'react';
 import { Button, Form, Segment } from 'semantic-ui-react';
-import { Activity } from '../../../app/models/activity';
-import { act } from 'react-dom/test-utils';
+import { useStore } from '../../../app/stores/store';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-  activity: Activity | undefined;
-  closeForm: () => void;
-  createOrEdit: (activity: Activity) => void;
-  submitting: boolean;
-}
+export default observer(function ActivityForm() { //destructures activity to the local name selectedActivity
+  const { activityStore } = useStore();
+  const { selectedActivity, closeForm, createActivity, updateActivity, loading } = activityStore;
 
-export default function ActivityForm({ activity: selectedActivity, closeForm, createOrEdit, submitting }: Props) { //destructures activity to the local name selectedActivity
   const initialState = selectedActivity ?? {
     id: '',
     title: '',
@@ -24,7 +20,7 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
   const [activity, setActivity] = useState(initialState);
 
   function handleSubmit() {
-    createOrEdit(activity);
+    activity.id ? updateActivity(activity) : createActivity(activity);
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
@@ -41,9 +37,9 @@ export default function ActivityForm({ activity: selectedActivity, closeForm, cr
         <Form.Input placeholder='Date' type='date' value={activity.date} name='date' onChange={handleInputChange} />
         <Form.Input placeholder='City' value={activity.city} name='city' onChange={handleInputChange} />
         <Form.Input placeholder='Venue' value={activity.venue} name='venue' onChange={handleInputChange} />
-        <Button loading={submitting} floated='right' positive type='submit' content='Submit' /> {/*loading checks if the form is currently submitting and displays a loading graphic if so*/}
+        <Button loading={loading} floated='right' positive type='submit' content='Submit' /> {/*loading checks if the form is currently submitting and displays a loading graphic if so*/}
         <Button onClick={closeForm} floated='right' type='submit' content='Cancel' />
       </Form>
     </Segment>
   )
-}
+})
