@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Microsoft.AspNetCore.Identity;
+using Domain;
 
 namespace API
 {
@@ -22,8 +24,9 @@ namespace API
             try
             {
                 var context = services.GetRequiredService<DataContext>();
+                var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 await context.Database.MigrateAsync(); // syncs db with our migrations which are derived from the entities 
-                await Seed.SeedData(context); // seeds db with our test seed data
+                await Seed.SeedData(context, userManager); // seeds db with our test seed data
             }
             catch (Exception ex)
             {
