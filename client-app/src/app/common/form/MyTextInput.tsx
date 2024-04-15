@@ -5,6 +5,7 @@ interface Props {
   placeholder: string;
   name: string;
   label?: string;
+  type?: string; // defualt text but cna be overriden
 }
 
 export default function MyTextInput(props: Props) {

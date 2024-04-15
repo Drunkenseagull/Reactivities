@@ -5,6 +5,7 @@ import { Activity } from '../models/activity';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
+import { User, UserFormValues } from '../models/user';
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -64,16 +65,23 @@ const requests = {
   del: <T>(url: string) => axios.delete<T>(url).then(responseBody)
 }
 
-const activities = {
-  list: () => requests.get<Activity[]>('/activities'),
-  details: (id: string) => requests.get<Activity>(`/activities/${id}`),
-  create: (activity: Activity) => axios.post<void>('/activities', activity),
-  update: (activity: Activity) => axios.put<void>(`/activities/${activity.id}`, activity),
-  delete: (id: string) => axios.delete<void>(`/activities/${id}`)
+const Activities = {
+  list: () => requests.get<Activity[]>('/Activities'),
+  details: (id: string) => requests.get<Activity>(`/Activities/${id}`),
+  create: (activity: Activity) => axios.post<void>('/Activities', activity),
+  update: (activity: Activity) => axios.put<void>(`/Activities/${activity.id}`, activity),
+  delete: (id: string) => axios.delete<void>(`/Activities/${id}`)
+}
+
+const Account = {
+  current: () => requests.get<User>('/account'),
+  login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+  register: (user: UserFormValues) => requests.post<User>('/account/register', user)
 }
 
 const agent = {
-  activities
+  Activities,
+  Account
 }
 
 export default agent;
