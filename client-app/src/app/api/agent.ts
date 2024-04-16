@@ -17,6 +17,12 @@ const sleep = (delay: number) => {
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 // sets up interceptor middleware which runs on axios objects directly before send (request) or directly after recieve (response)
+axios.interceptors.request.use(config => {
+  const token = store.commonStore.token;
+  if (token && config.headers) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+})
+
 axios.interceptors.response.use(async response => {
   await sleep(1000);
   return response;

@@ -20,6 +20,7 @@ export default class UserStore {
     store.commonStore.setToken(user.token);
     runInAction(() => this.user = user);
     router.navigate('/activities');
+    store.modalStore.closeModal();
   }
 
   logout = () => {
@@ -28,27 +29,20 @@ export default class UserStore {
     router.navigate('/');
   }
 
-  /*  register = async (creds: UserFormValues) => {
-      try {
-        const user = await agent.Account.register(creds);
-        store.commonStore.setToken(user.token);
-        runInAction(() => this.user = user);
-        router.navigate('/activities');
-        store.modalStore.closeModal();
-      } catch (error) {
-        throw error;
-      }
-  }*/
+  register = async (creds: UserFormValues) => {
+    const user = await agent.Account.register(creds);
+    store.commonStore.setToken(user.token);
+    runInAction(() => this.user = user);
+    router.navigate('/activities');
+    store.modalStore.closeModal();
+  }
 
-
-
-
-  /*  getUser = async () => {
-      try {
-        const user = await agent.Account.current();
-        runInAction(() => this.user = user);
-      } catch (error) {
-        console.log(error);
-      }
-  }*/
+  fetchUser = async () => {
+    try {
+      const user = await agent.Account.current();
+      runInAction(() => this.user = user);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

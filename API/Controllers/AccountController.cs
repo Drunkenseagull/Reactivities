@@ -12,7 +12,7 @@ namespace API.Controllers
   /// Everything to do with user registration and login.
   /// </summary>
   [ApiController]
-  [Route("api/[controller]")] // values in [] are repalced with the controller name from the file, in this case Account, so route is baseroute/api/Account
+  [Route("api/[controller]")] // values in [] are replaced with the controller name from the file, in this case Account, so route is baseroute/api/Account
   public class AccountController : BaseAPIController
   {
     private readonly UserManager<AppUser> _userManager;
@@ -51,13 +51,15 @@ namespace API.Controllers
     {
       if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
       {
-        return BadRequest("Username is already taken");
+        ModelState.AddModelError("username", "Username is already taken.");
+        return ValidationProblem();
       }
 
       if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
       {
-        return BadRequest("Email is already taken");
-      }
+				ModelState.AddModelError("email", "Email is already taken.");
+        return ValidationProblem();
+			}
 
       var user = new AppUser
       {
