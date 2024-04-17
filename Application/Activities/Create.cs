@@ -3,6 +3,8 @@ using Domain;
 using Persistence;
 using FluentValidation;
 using Application.Core;
+using Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Activities
 {
@@ -24,15 +26,30 @@ namespace Application.Activities
 		public class Handler : IRequestHandler<Command, Result<Unit>>
 		{
 			private readonly DataContext _dataContext;
+      private readonly IUserAccessor _userAccessor;
 
-			public Handler(DataContext dataContext)
+      public Handler(DataContext dataContext, IUserAccessor userAccessor)
 			{
 				_dataContext = dataContext;
-			}
+        _userAccessor = userAccessor;
+      }
 			public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
 			{
-				// this updates the entity that EF is tracking, but doesn't in itself cause a DB write
-				_dataContext.Add(request.Activity);
+        var user = await _dataContext.Users.FirstOrDefaultAsync(x =>
+                  x.UserName == _userAccessor.GetUsername());
+
+        var attendee = new ActivityAttendee
+        {
+          AppUser = user,
+          Activity = request.Activity,
+          IsHost = true
+        };
+
+        request.Activity.Attendees.Add(attendee);
+
+
+        // this updates the entity that EF is tracking, but doesn't in itself cause a DB write
+        _dataContext.Add(request.Activity);
 
 				// this causes the entities to actually be written to the db. Returns number of successful records written
 				var result = await _dataContext.SaveChangesAsync() > 0;
