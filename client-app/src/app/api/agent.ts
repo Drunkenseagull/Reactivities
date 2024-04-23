@@ -1,7 +1,7 @@
 // responsibile for the actual issuing of requests to the API
 
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { Activity } from '../models/activity';
+import { IActivity, ActivityFormValues } from '../models/activity';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
@@ -64,6 +64,7 @@ axios.interceptors.response.use(async response => {
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data; // simple function to get data out of axios response object
 
+// base requests, all other request types build on these. Maps fetched json to <T> 
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
   post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
@@ -72,11 +73,12 @@ const requests = {
 }
 
 const Activities = {
-  list: () => requests.get<Activity[]>('/Activities'),
-  details: (id: string) => requests.get<Activity>(`/Activities/${id}`),
-  create: (activity: Activity) => axios.post<void>('/Activities', activity),
-  update: (activity: Activity) => axios.put<void>(`/Activities/${activity.id}`, activity),
-  delete: (id: string) => axios.delete<void>(`/Activities/${id}`)
+  list: () => requests.get<IActivity[]>('/Activities'),
+  details: (id: string) => requests.get<IActivity>(`/Activities/${id}`),
+  create: (activity: ActivityFormValues) => requests.post<void>('/Activities', activity),
+  update: (activity: ActivityFormValues) => requests.put<void>(`/Activities/${activity.id}`, activity),
+  delete: (id: string) => requests.del<void>(`/Activities/${id}`),
+  attend: (id: string) => requests.post<void>(`/activities/${id}/attend`, {})
 }
 
 const Account = {
