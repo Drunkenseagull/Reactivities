@@ -3,6 +3,7 @@ using Application.Core;
 using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Photos;
 using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -33,6 +34,8 @@ namespace API.Extensions
       services.AddValidatorsFromAssemblyContaining<Create>(); // causes asp to look for all validators within the dll the <create> validator is in, which is the dll all our validators will be in so finds them all
       services.AddHttpContextAccessor(); // allows our httpContext to be used outside the asp pipeline
       services.AddScoped<IUserAccessor, UserAccessor>(); // defines a service that when type IUserAccessor is requested, the implemented object provided is of type UserAccessor
+      services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+      services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary")); // configure services to use cloudiary
 
       services.AddSwaggerGen(c =>
       {
