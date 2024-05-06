@@ -36,7 +36,6 @@ namespace Application.Activities
 
 			public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
 			{
-				Console.WriteLine("1");
 				var activity = await _dataContext.Activities.FindAsync(request.Activity.Id);
 
 				if (activity == null) return null;
@@ -45,10 +44,8 @@ namespace Application.Activities
 				_mapper.Map(request.Activity, activity);
 
 				var result = await _dataContext.SaveChangesAsync() > 0;
-				Console.WriteLine(result);
 				if (!result)
 				{
-					Console.WriteLine("2");
 					return Result<Unit>.Failure("Failed to update activity.");
 				}
 				return Result<Unit>.Success(Unit.Value);
