@@ -1,12 +1,11 @@
 using Persistence;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
-using Application.Activities;
-using Application.Core;
 using API.Extensions;
 using API.Middleware;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using API.SignalR;
 
 namespace API
 {
@@ -50,10 +49,16 @@ namespace API
       app.UseAuthentication();
       app.UseAuthorization();
 
+
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapControllers();
-      });
-    }
+			});
+
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapHub<ChatHub>("/chat");
+			});
+		}
   }
 }

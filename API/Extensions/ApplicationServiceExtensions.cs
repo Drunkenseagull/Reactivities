@@ -24,18 +24,21 @@ namespace API.Extensions
       {
         opt.AddPolicy("CorsPolicy", policy =>
                           {
-                        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                        policy.AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .AllowCredentials() // required for signalR, passes jwt differently 
+                            .WithOrigins("http://localhost:3000");
                       });
       });
-      //registers all mediator handlers as the assembly is common to call of them 
-      services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(List.Handler).Assembly));
-      services.AddAutoMapper(typeof(MappingProfiles).Assembly); // used to map one type of object to another
+      services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(typeof(List.Handler).Assembly)); //registers all mediator handlers as the assembly is common to call of them 
+			services.AddAutoMapper(typeof(MappingProfiles).Assembly); // used to map one type of object to another
       services.AddFluentValidationAutoValidation(); // used to validate data entries in asp pipeline
       services.AddValidatorsFromAssemblyContaining<Create>(); // causes asp to look for all validators within the dll the <create> validator is in, which is the dll all our validators will be in so finds them all
       services.AddHttpContextAccessor(); // allows our httpContext to be used outside the asp pipeline
       services.AddScoped<IUserAccessor, UserAccessor>(); // defines a service that when type IUserAccessor is requested, the implemented object provided is of type UserAccessor
       services.AddScoped<IPhotoAccessor, PhotoAccessor>();
       services.Configure<CloudinarySettings>(configuration.GetSection("Cloudinary")); // configure services to use cloudiary
+      services.AddSignalR();
 
       services.AddSwaggerGen(c =>
       {

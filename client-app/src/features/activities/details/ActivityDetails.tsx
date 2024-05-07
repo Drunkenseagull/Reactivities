@@ -11,12 +11,13 @@ import ActivityDetailedSidebar from './ActivityDetailedSidebar';
 
 export default observer(function ActivityDetails() {
   const { activityStore } = useStore();
-  const { selectedActivity: activity, loadActivity, loadingInitial } = activityStore;
+  const { selectedActivity: activity, loadActivity, loadingInitial, clearSelectedActivity } = activityStore;
   const { id } = useParams();
 
   // is run every time component renders, id changes or loadActivity is called
   useEffect(() => {
     if (id) loadActivity(id);
+    return () => clearSelectedActivity();
   }, [id, loadActivity]);
 
   if (loadingInitial || !activity) return <LoadingComponent />; // redundant check needed to please typescript
@@ -26,7 +27,7 @@ export default observer(function ActivityDetails() {
       <Grid.Column width={10}>
         <ActivityDetailedHeader activity={activity} />
         <ActivityDetailedInfo activity={activity} />
-        <ActivityDetailedChat />
+        <ActivityDetailedChat activityId={activity.id} />
       </Grid.Column>
       <Grid.Column width={6}>
         <ActivityDetailedSidebar activity={activity} />
